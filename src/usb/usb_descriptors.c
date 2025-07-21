@@ -319,14 +319,14 @@ uint8_t const *tud_descriptor_bos_cb(void) {
 char *string_desc_itf[4] = {0};
 char const *string_desc_arr [] = {
     (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-    "Pol Henarejos",                     // 1: Manufacturer
-    "Pico Key",                       // 2: Product
+    "Yubico",                     // 1: Manufacturer
+    "Yubikey",                       // 2: Product
     "11223344",                      // 3: Serials, should use chip ID
     "Config"               // 4: Vendor Interface
     , "HID Interface"
     , "HID Keyboard Interface"
 #ifdef USB_ITF_HID
-    , "CCID OTP FIDO Interface"
+    , "OTP+FIDO+CCID Interface"
 #else
     , "CCID Interface"
 #endif
