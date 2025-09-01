@@ -325,6 +325,9 @@ int driver_process_usb_packet_hid(uint16_t read) {
     int apdu_sent = 0;
     if (read >= 5) {
         driver_init_hid();
+        if (memcmp(ctap_req, ctap_resp, 64) == 0) {
+            return last_packet_time = 0;
+        }
 
         hid_rx[ITF_HID_CTAP].r_ptr += 64;
         if (hid_rx[ITF_HID_CTAP].r_ptr >= hid_rx[ITF_HID_CTAP].w_ptr) {
