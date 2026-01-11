@@ -101,14 +101,16 @@ static struct urgb_color urgb_color_table[] = {
 };
 
 static inline uint32_t urgb_u32(uint8_t r, uint8_t g, uint8_t b) {
+    if (phy_data.led_driver & PHY_LED_DRIVER_SWAP) {
+    #if 1   // TODO: How to adapt WS2812 with different data ordering ?
+        return ((uint32_t)(r) << 16) |  // For RGB data ordering WS2812
+            ((uint32_t)(g) << 8) |
+            (uint32_t)(b);
+    #endif
+    }
     return ((uint32_t) (r) << 8) |  // For GRB data ordering WS2812
            ((uint32_t) (g) << 16) |
            (uint32_t) (b);
-#if 0   // TODO: How to adapt WS2812 with different data ordering ?
-    return ((uint32_t)(r) << 16) |  // For RGB data ordering WS2812
-           ((uint32_t)(g) << 8) |
-           (uint32_t)(b);
-#endif
 }
 
 static inline void ws2812_put_pixel(uint32_t u32_pixel) {

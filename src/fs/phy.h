@@ -62,6 +62,7 @@
 #define PHY_LED_DRIVER_NEOPIXEL  0x5
 #endif
 
+#define PHY_LED_DRIVER_SWAP     0x80
 #define PHY_LED_DRIVER_NONE     0xFF
 
 #include <stdint.h>

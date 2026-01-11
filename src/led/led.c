@@ -144,7 +144,7 @@ void led_init(void) {
     phy_data.led_gpio = phy_data.led_gpio_present ? phy_data.led_gpio : PICO_DEFAULT_LED_PIN;
 #endif
     if (phy_data.led_driver_present) {
-        switch (phy_data.led_driver) {
+        switch (phy_data.led_driver & 15) {
             case PHY_LED_DRIVER_PICO:
                 led_driver = &led_driver_pico;
                 break;
