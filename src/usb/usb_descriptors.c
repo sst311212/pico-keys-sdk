@@ -262,7 +262,13 @@ bool tud_vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_requ
         case TUSB_REQ_TYPE_VENDOR:
             switch (request->bRequest) {
                 case VENDOR_REQUEST_WEBUSB:
-                    return tud_control_xfer(rhport, request, (void*)(uintptr_t) &desc_url, desc_url.bLength);
+                    switch (phy_data.vid) {
+                        case 0x2E8A:
+                        case 0xFEFF:
+                            return tud_control_xfer(rhport, request, (void*)(uintptr_t) &desc_url, desc_url.bLength);
+                        default:
+                            return tud_control_xfer(rhport, request, (void*)(uintptr_t) &desc_url, 3);
+                    }
 
                 case VENDOR_REQUEST_MICROSOFT:
                     if (request->wIndex == 7) {
